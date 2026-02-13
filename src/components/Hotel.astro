@@ -1,0 +1,417 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+
+interface Props {
+    lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const t = useTranslations(lang);
+
+// Hotel images for carousel
+const hotelImages = [
+    { src: "/images/hotel (1).webp", alt: "Hotel Dorado de la 70 - Vista 1" },
+    { src: "/images/hotel (2).webp", alt: "Hotel Dorado de la 70 - Vista 2" },
+    { src: "/images/hotel (3).webp", alt: "Hotel Dorado de la 70 - Vista 3" },
+    { src: "/images/hotel (4).webp", alt: "Hotel Dorado de la 70 - Vista 4" },
+    { src: "/images/hotel (5).webp", alt: "Hotel Dorado de la 70 - Vista 5" },
+    { src: "/images/hotel (6).webp", alt: "Hotel Dorado de la 70 - Vista 6" },
+    { src: "/images/hotel (7).webp", alt: "Hotel Dorado de la 70 - Vista 7" },
+    { src: "/images/hotel (8).webp", alt: "Hotel Dorado de la 70 - Vista 8" },
+    { src: "/images/hotel (9).webp", alt: "Hotel Dorado de la 70 - Vista 9" },
+    { src: "/images/hotel (10).webp", alt: "Hotel Dorado de la 70 - Vista 10" },
+];
+---
+
+<section class="section hotel-section" id="hotel">
+    <div class="container">
+        <div class="hotel-header">
+            <h2 class="hotel-title">{t.hotel.sectionTitle}</h2>
+            <p class="hotel-subtitle">{t.hotel.subtitle}</p>
+        </div>
+
+        <div class="hotel-content">
+            <!-- Left: Carousel -->
+            <div class="hotel-carousel-wrapper">
+                <div class="hotel-carousel" id="hotelCarousel">
+                    <div class="carousel-track">
+                        {
+                            hotelImages.map((img, index) => (
+                                <div class="carousel-slide" data-index={index}>
+                                    <img
+                                        src={img.src}
+                                        alt={img.alt}
+                                        loading={index === 0 ? "eager" : "lazy"}
+                                        decoding="async"
+                                    />
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+                <!-- Navigation arrows -->
+                <button
+                    class="carousel-btn carousel-prev"
+                    aria-label="Previous slide"
+                >
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <polyline points="15,18 9,12 15,6"></polyline>
+                    </svg>
+                </button>
+                <button
+                    class="carousel-btn carousel-next"
+                    aria-label="Next slide"
+                >
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <polyline points="9,6 15,12 9,18"></polyline>
+                    </svg>
+                </button>
+                <!-- Dots indicator -->
+                <div class="carousel-dots">
+                    {
+                        hotelImages.map((_, index) => (
+                            <button
+                                class={`carousel-dot ${index === 0 ? "active" : ""}`}
+                                data-index={index}
+                                aria-label={`Go to slide ${index + 1}`}
+                            />
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- Right: Hotel Info -->
+            <div class="hotel-info">
+                <div class="hotel-logo">
+                    <img
+                        src="/images/logo-hotel-dorado-la-70-medellin.svg"
+                        alt="Hotel Dorado de la 70"
+                        width="200"
+                        height="100"
+                    />
+                </div>
+                <h3 class="hotel-name">HOTEL DORADO DE LA 70</h3>
+                <p class="hotel-address">
+                    <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                        ></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    {t.hotel.address}
+                </p>
+
+                <!-- Google Map -->
+                <div class="hotel-map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1983.1!2d-75.588389!3d6.2507906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e442908331bff63%3A0x509a345753f1d135!2sHotel%20Dorado%20la%2070!5e0!3m2!1sen!2sco!4v1707600000000"
+                        width="100%"
+                        height="250"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Hotel Dorado de la 70 Location"></iframe>
+                </div>
+
+                <a
+                    href="https://www.google.com/maps/search/?api=1&query=Carrera+70+44B-66+Laureles+Estadio+Medellin+Colombia"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-secondary"
+                >
+                    {t.hotel.viewMap}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .hotel-section {
+        background: transparent;
+    }
+
+    .hotel-header {
+        text-align: center;
+        margin-bottom: var(--spacing-3xl);
+    }
+
+    .hotel-title {
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-primary);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .hotel-subtitle {
+        font-size: var(--font-size-lg);
+        color: var(--color-text-secondary);
+    }
+
+    .hotel-content {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: var(--spacing-3xl);
+        align-items: start;
+    }
+
+    /* Carousel Styles */
+    .hotel-carousel-wrapper {
+        position: relative;
+    }
+
+    .hotel-carousel {
+        overflow: hidden;
+        border-radius: var(--radius-lg);
+    }
+
+    .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+
+    .carousel-slide {
+        min-width: 100%;
+        aspect-ratio: 16/10;
+    }
+
+    .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+            background var(--transition-base),
+            opacity var(--transition-base);
+        z-index: 10;
+    }
+
+    .carousel-btn:hover {
+        background: rgba(0, 0, 0, 0.8);
+    }
+
+    .carousel-prev {
+        left: 12px;
+    }
+
+    .carousel-next {
+        right: 12px;
+    }
+
+    .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: var(--spacing-md);
+    }
+
+    .carousel-dot {
+        width: 10px;
+        height: 10px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        transition:
+            background var(--transition-base),
+            transform var(--transition-base);
+    }
+
+    .carousel-dot:hover {
+        background: rgba(255, 255, 255, 0.5);
+    }
+
+    .carousel-dot.active {
+        background: var(--color-accent-gold);
+        transform: scale(1.2);
+    }
+
+    /* Hotel Info Styles */
+    .hotel-info {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-lg);
+    }
+
+    .hotel-logo {
+        max-width: 200px;
+    }
+
+    .hotel-logo img {
+        width: 100%;
+        height: auto;
+    }
+
+    .hotel-name {
+        font-size: var(--font-size-xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-accent-gold);
+        letter-spacing: 0.05em;
+    }
+
+    .hotel-address {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+        font-size: var(--font-size-sm);
+        color: var(--color-text-secondary);
+        line-height: 1.6;
+    }
+
+    .hotel-address svg {
+        flex-shrink: 0;
+        color: var(--color-accent-gold);
+        margin-top: 2px;
+    }
+
+    .hotel-map {
+        border-radius: var(--radius-md);
+        overflow: hidden;
+    }
+
+    .hotel-map iframe {
+        display: block;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 900px) {
+        .hotel-content {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-xl);
+        }
+
+        .hotel-info {
+            align-items: center;
+            text-align: center;
+        }
+
+        .hotel-address {
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .carousel-btn {
+            width: 36px;
+            height: 36px;
+        }
+
+        .carousel-prev {
+            left: 8px;
+        }
+
+        .carousel-next {
+            right: 8px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const carousel = document.getElementById("hotelCarousel");
+        if (!carousel) return;
+
+        const track = carousel.querySelector(".carousel-track") as HTMLElement;
+        const slides = carousel.querySelectorAll(".carousel-slide");
+        const dots = document.querySelectorAll(".carousel-dot");
+        const prevBtn = document.querySelector(".carousel-prev");
+        const nextBtn = document.querySelector(".carousel-next");
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle("active", i === currentIndex);
+            });
+        }
+
+        function goToSlide(index: number) {
+            currentIndex = (index + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function nextSlide() {
+            goToSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentIndex - 1);
+        }
+
+        prevBtn?.addEventListener("click", prevSlide);
+        nextBtn?.addEventListener("click", nextSlide);
+
+        dots.forEach((dot) => {
+            dot.addEventListener("click", () => {
+                const index = parseInt(dot.getAttribute("data-index") || "0");
+                goToSlide(index);
+            });
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        carousel.addEventListener(
+            "touchstart",
+            (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            },
+            { passive: true },
+        );
+
+        carousel.addEventListener(
+            "touchend",
+            (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) nextSlide();
+                    else prevSlide();
+                }
+            },
+            { passive: true },
+        );
+
+        // Auto-play (optional - every 5 seconds)
+        setInterval(nextSlide, 5000);
+    });
+</script>

@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "memories": "Recuerdos",
+    "organizer": "Organizador",
+    "packages": "Paquetes",
+    "maestros": "Maestros",
+    "hotel": "Hotel",
+    "policy": "Cancelación",
+    "register": "Inscríbete",
+    "contact": "Contacto",
+    "openMenu": "Abrir menú",
+    "switchLang": "Switch to English",
+    "switchLangTitle": "English"
+  },
+  "hero": {
+    "title": "Colombia Tango Festival",
+    "subtitle": "Vive la pasión del tango en Medellín",
+    "date": "Llegada 10/26, Salida 11/02",
+    "cta": "Inscríbete ahora",
+    "ctaSecondary": "Ver Paquetes",
+    "dancersAlt": "Pareja bailando tango"
+  },
+  "organizer": {
+    "title": "JORGE NEL GIRALDO",
+    "subtitle": "ORGANIZADOR",
+    "bio": [
+      "He dedicado 40 años al tango. Mis padres fueron excelentes bailadores de la Melodía Argentina. Mi padre era fabricante de zapatos, y por eso tengo el amor por el tango y por la zapatería muy adentro.",
+      "Los mejores recuerdos de mi tierna infancia siempre están en mi mente. De niño pequeño, acostado en una cunita al lado del taller de mi papá, veía a mi padre hacer zapatos mientras escuchaba los mejores tangos de esa época. La música del tango, así como el sonido del martillo pegando las suelas de los zapatos, son recuerdos maravillosos.",
+      "En un punto de mi carrera como bailarín de tango, me enfermé y me di cuenta, aún más profundamente, del hecho de que mi cuerpo era la herramienta para mi trabajo.",
+      "Si no estaba físicamente sano, no habría podido ganar dinero de mi pasión por el tango. Fue entonces cuando consideré cómo obtener ingresos que no dependieran de mi cuerpo. Mi padre me dijo 'deberías vender zapatos de tango'. Lo pensé mucho; vender zapatos tomaría mucho tiempo, y lo que realmente quería hacer era bailar. Sin embargo, mi papá me hizo darme cuenta de que tendría que tener un negocio para obtener ingresos sin necesidad de depender de mi cuerpo como herramienta de trabajo. Así fue como empecé el negocio de zapatos de tango en 1990.",
+      "Hoy, agradezco a mi padre, quien me animó a usar las herramientas de mi infancia. La compañía Mr. Tango Shoes ahora es conocida en todo el mundo del tango. Gracias a esto, puedo dedicar parte de mi tiempo a bailar tango y dedicar el resto de mi tiempo al negocio de fabricación de zapatos."
+    ]
+  },
+  "memories": {
+    "sectionTitle": "RECUERDOS",
+    "sectionSubtitle": "Momentos inolvidables de nuestros festivales",
+    "altPrefix": "Recuerdo del festival",
+    "ariaLabel": "Galería de recuerdos del festival"
+  },
+  "packages": {
+    "sectionTitle": "TU PAQUETE INCLUYE",
+    "arrivalDate": "Llegada Lunes 26 - Regreso Nov 2",
+    "register": "INSCRÍBETE",
+    "earlyBird": "Early Bird",
+    "notIncluded": "No incluido en este paquete",
+    "mainBenefits": [
+      "7 NOCHES DE HOTEL INCLUIDAS",
+      "7 MILONGAS",
+      "SHOWS NOCTURNOS",
+      "ORQUESTA EN VIVO — SÁBADO POR LA NOCHE",
+      "2 SESIONES SEMI-PRIVADAS",
+      "8 PAREJAS DE MAESTROS",
+      "15 INSTRUCTORES DE APOYO",
+      "30 TAXI DANCERS",
+      "30 TALLERES GRUPALES",
+      "MEDIO DÍA PARA EXPLORAR ATRACCIONES LOCALES",
+      "SEGURO DE VIAJE"
+    ],
+    "extraBenefits": [
+      "3 CENAS",
+      "1 PAR DE ZAPATOS MR TANGO"
+    ]
+  },
+  "maestros": {
+    "sectionTitle": "MAESTROS",
+    "sectionSubtitle": "Aprende de los mejores bailarines de tango"
+  },
+  "hotel": {
+    "sectionTitle": "HOTEL & SEDE",
+    "subtitle": "Tu hogar durante el festival",
+    "address": "Carrera 70 # 44B - 66, Laureles - Estadio, 050034 Medellín, Colombia",
+    "viewMap": "Ver en Google Maps"
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "¿Tienes preguntas? Contáctanos",
+    "phoneUsa": "USA",
+    "phoneColombia": "Colombia WhatsApp",
+    "whatsappAria": "Contactar por WhatsApp"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados",
+    "policy": "Política de Cancelación"
+  },
+  "policy": {
+    "pageTitle": "Política de Cancelación",
+    "title": "POLÍTICA DE CANCELACIÓN",
+    "intro": "Por favor, tómate un momento para entender nuestra política de cancelación.",
+    "rules": [
+      {
+        "condition": "Cancelas dentro de una semana después de tu pago",
+        "result": "reembolso del 90%."
+      },
+      {
+        "condition": "Cancelas después de una semana y hasta dos meses después de tu pago",
+        "result": "reembolso del 70%."
+      },
+      {
+        "condition": "Cancelas después de dos meses y hasta un mes antes del evento",
+        "result": "reembolso del 50%."
+      },
+      {
+        "condition": "Cancelas dentro del mes antes del evento",
+        "result": "sin reembolso."
+      }
+    ],
+    "note": "Esta política existe porque debemos asegurar hoteles, pagar comidas, reservar espacios para eventos, programar tours y hacer depósitos con anticipación. En Colombia, la mayoría de las reservas requieren el pago completo o un depósito mínimo del 50%.",
+    "warning": "Bajo ninguna circunstancia—enfermedad, accidente, emergencia, situación familiar—se emitirán reembolsos más allá de los términos establecidos anteriormente.",
+    "warningBold": "Bajo ninguna circunstancia",
+    "backHome": "← Volver al Inicio"
+  }
+}

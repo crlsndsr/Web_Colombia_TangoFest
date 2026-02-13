@@ -1,0 +1,113 @@
+{
+    "nav": {
+        "home": "Home",
+        "memories": "Memories",
+        "organizer": "Organizer",
+        "packages": "Packages",
+        "maestros": "Instructors",
+        "hotel": "Hotel",
+        "policy": "Cancellation",
+        "register": "Register",
+        "contact": "Contact",
+        "openMenu": "Open menu",
+        "switchLang": "Cambiar a Español",
+        "switchLangTitle": "Español"
+    },
+    "hero": {
+        "title": "Colombia Tango Festival",
+        "subtitle": "Experience the passion of tango in Medellín",
+        "date": "Arrival 10/26, Departure 11/02",
+        "cta": "Register Now",
+        "ctaSecondary": "View Packages",
+        "dancersAlt": "Couple dancing tango"
+    },
+    "organizer": {
+        "title": "JORGE NEL GIRALDO",
+        "subtitle": "ORGANIZER",
+        "bio": [
+            "I have devoted 40 years to tango. My parents were excellent dancers of the Argentinian Melody. My father was a shoe manufacturer, and for that reason I keep the love for tango, and for shoemaking, deep inside.",
+            "The best memories of my tender childhood are always in my mind. As a small child, lying in a little cradle beside my dad's workshop, I watched my father make shoes as he listened to the best tangos of that time. The tango music, as well as the sound of the hammer attaching the shoe soles, are wonderful memories.",
+            "At one point in my career as a tango dancer, I got sick and realized, even more profoundly, the fact that my body was the tool for my work.",
+            "If I was not physically healthy, I would not have been able to make money from my passion for tango. This is when I considered how to earn an income that did not depend on my body. My father said to me 'you should sell tango shoes'. I thought very hard about it; selling shoes would take a lot of time, and what I really wanted to do was to dance. However, my dad made me realize that I would have to own a business to get an income without needing to depend on my body as a working tool. That is how I started the tango shoe business in 1990.",
+            "Today, I thank my father, who encouraged me to use the tools from my childhood. The Mr. Tango Shoes Company is now known throughout the tango world. Because of this, I can spend part of my time dancing tango and dedicate the rest of my time to the shoe manufacturing business."
+        ]
+    },
+    "memories": {
+        "sectionTitle": "MEMORIES",
+        "sectionSubtitle": "Unforgettable moments from our festivals",
+        "altPrefix": "Festival memory",
+        "ariaLabel": "Festival memories gallery"
+    },
+    "packages": {
+        "sectionTitle": "YOUR PACKAGE INCLUDES",
+        "arrivalDate": "Arrive Monday 26 return Nov 2",
+        "register": "REGISTER",
+        "earlyBird": "Early Bird",
+        "notIncluded": "Not included in this package",
+        "mainBenefits": [
+            "7 NIGHT HOTEL STAY INCLUDED",
+            "7 MILONGAS",
+            "NIGHTLY PERFORMANCES",
+            "LIVE ORCHESTRA — SATURDAY NIGHT",
+            "2 SEMI-PRIVATE SESSIONS",
+            "8 MAESTRO COUPLES",
+            "15 SUPPORT INSTRUCTORS",
+            "30 TAXI DANCERS",
+            "30 GROUP WORKSHOPS",
+            "HALF-DAY TO EXPLORE LOCAL ATTRACTIONS",
+            "TRAVEL INSURANCE"
+        ],
+        "extraBenefits": [
+            "3 DINNERS",
+            "1 PAIR MR TANGO SHOES"
+        ]
+    },
+    "maestros": {
+        "sectionTitle": "MASTER INSTRUCTORS",
+        "sectionSubtitle": "Learn from Colombia's finest tango dancers"
+    },
+    "hotel": {
+        "sectionTitle": "HOTEL & VENUE",
+        "subtitle": "Your home during the festival",
+        "address": "Carrera 70 # 44B - 66, Laureles - Estadio, 050034 Medellín, Colombia",
+        "viewMap": "View on Google Maps"
+    },
+    "contact": {
+        "title": "Contact",
+        "subtitle": "Have questions? Get in touch",
+        "phoneUsa": "USA",
+        "phoneColombia": "Colombia WhatsApp",
+        "whatsappAria": "Contact via WhatsApp"
+    },
+    "footer": {
+        "rights": "All rights reserved",
+        "policy": "Cancellation Policy"
+    },
+    "policy": {
+        "pageTitle": "Cancellation Policy",
+        "title": "CANCELLATION POLICY",
+        "intro": "Please take a moment to understand our cancellation policy.",
+        "rules": [
+            {
+                "condition": "Cancel within one week after your payment",
+                "result": "90% refund."
+            },
+            {
+                "condition": "Cancel after one week and up to two months after your payment",
+                "result": "70% refund."
+            },
+            {
+                "condition": "Cancel after two months and up to one month before the event",
+                "result": "50% refund."
+            },
+            {
+                "condition": "Cancel within the month before the event",
+                "result": "no refund."
+            }
+        ],
+        "note": "This policy exists because we must secure hotels, pay for meals, reserve event spaces, schedule tours, and make deposits well in advance. In Colombia, most bookings require full payment or a minimum 50% deposit.",
+        "warning": "Under no circumstance—illness, accident, emergency, family situation—will refunds be issued beyond the terms stated above.",
+        "warningBold": "Under no circumstance",
+        "backHome": "← Back to Home"
+    }
+}

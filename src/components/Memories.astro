@@ -1,0 +1,209 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+
+interface Props {
+    lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const t = useTranslations(lang);
+
+const images = Array.from({ length: 10 }, (_, i) => ({
+    src: `/images/IMG${i + 1}.webp`,
+    alt: `${t.memories.altPrefix} ${i + 1}`,
+}));
+
+// Duplicate images for seamless infinite loop
+const loopImages = [...images, ...images];
+---
+
+<section class="section memories-section" id="memories">
+    <div class="container">
+        <div class="memories-header">
+            <h2 class="memories-title">{t.memories.sectionTitle}</h2>
+            <p class="memories-subtitle">{t.memories.sectionSubtitle}</p>
+        </div>
+    </div>
+
+    <!-- Marquee row 1: scrolls left -->
+    <div class="marquee" aria-label={t.memories.ariaLabel}>
+        <div class="marquee-track marquee-left">
+            {
+                loopImages.map((img, i) => (
+                    <div class="marquee-slide">
+                        <img
+                            src={img.src}
+                            alt={img.alt}
+                            width="480"
+                            height="270"
+                            loading="lazy"
+                            decoding="async"
+                        />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+
+    <!-- Marquee row 2: scrolls right (reverse) -->
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee-track marquee-right">
+            {
+                loopImages.reverse().map((img, i) => (
+                    <div class="marquee-slide">
+                        <img
+                            src={img.src}
+                            alt=""
+                            width="480"
+                            height="270"
+                            loading="lazy"
+                            decoding="async"
+                        />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .memories-section {
+        background: transparent;
+        overflow: hidden;
+        padding-bottom: var(--spacing-3xl);
+    }
+
+    .memories-header {
+        text-align: center;
+        margin-bottom: var(--spacing-2xl);
+    }
+
+    .memories-title {
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-primary);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .memories-subtitle {
+        font-size: var(--font-size-lg);
+        color: var(--color-text-secondary);
+    }
+
+    /* Marquee container */
+    .marquee {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        margin-bottom: var(--spacing-md);
+        /* Fade edges */
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 5%,
+            black 95%,
+            transparent 100%
+        );
+        mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 5%,
+            black 95%,
+            transparent 100%
+        );
+    }
+
+    .marquee-track {
+        display: flex;
+        gap: var(--spacing-md);
+        width: max-content;
+        will-change: transform;
+    }
+
+    .marquee-left {
+        animation: scrollLeft 60s linear infinite;
+    }
+
+    .marquee-right {
+        animation: scrollRight 60s linear infinite;
+    }
+
+    .marquee-slide {
+        flex-shrink: 0;
+        width: 480px;
+        aspect-ratio: 16 / 9;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+    }
+
+    .marquee-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .marquee-slide:hover img {
+        transform: scale(1.05);
+    }
+
+    @keyframes scrollLeft {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    @keyframes scrollRight {
+        0% {
+            transform: translateX(-50%);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    /* Tablet */
+    @media (max-width: 968px) {
+        .marquee-slide {
+            width: 360px;
+        }
+    }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+        .marquee-slide {
+            width: 280px;
+        }
+
+        .marquee {
+            margin-bottom: var(--spacing-sm);
+        }
+    }
+
+    /* Respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        .marquee-left,
+        .marquee-right {
+            animation-play-state: paused;
+        }
+    }
+</style>
+
+<script>
+    // Pause animation on hover for accessibility
+    document.querySelectorAll(".marquee").forEach((marquee) => {
+        const track = marquee.querySelector(".marquee-track") as HTMLElement;
+        if (!track) return;
+
+        marquee.addEventListener("mouseenter", () => {
+            track.style.animationPlayState = "paused";
+        });
+
+        marquee.addEventListener("mouseleave", () => {
+            track.style.animationPlayState = "running";
+        });
+    });
+</script>

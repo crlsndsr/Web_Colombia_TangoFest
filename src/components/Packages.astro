@@ -1,0 +1,248 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+
+interface Props {
+    lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const t = useTranslations(lang);
+
+const packages = [
+    {
+        id: 1,
+        name: "PACKAGE #1",
+        price: "$1750",
+        isEarlyBird: false,
+        hasExtras: false,
+        formUrl: "https://forms.gle/LMb4L6F443MSkUVa6",
+    },
+    {
+        id: 2,
+        name: "PACKAGE #2",
+        price: "$1990",
+        isEarlyBird: true,
+        hasExtras: true,
+        formUrl:
+            "https://docs.google.com/forms/d/e/1FAIpQLScX0vlhf5OUsbPuL85J85Fgft_X0c2G891pqdlTgxQfdT9ozQ/viewform",
+    },
+];
+---
+
+<section class="section packages-section" id="packages">
+    <div class="container">
+        <div class="packages-header">
+            <h2 class="packages-title">{t.packages.sectionTitle}</h2>
+            <p class="packages-date">{t.packages.arrivalDate}</p>
+        </div>
+
+        <div class="packages-grid">
+            {
+                packages.map((pkg) => (
+                    <article class="package-card">
+                        <div class="package-header">
+                            <h3 class="package-name">{pkg.name}</h3>
+                            {pkg.isEarlyBird && (
+                                <span class="early-bird-badge">
+                                    {t.packages.earlyBird}
+                                </span>
+                            )}
+                        </div>
+
+                        <div class="package-price">
+                            <span class="price-amount">{pkg.price}</span>
+                        </div>
+
+                        <ul class="package-benefits">
+                            {t.packages.mainBenefits.map((benefit: string) => (
+                                <li class="benefit-item">
+                                    <span class="benefit-icon">✓</span>
+                                    <span>{benefit}</span>
+                                </li>
+                            ))}
+
+                            {/* Extra benefits - shown differently based on package */}
+                            {t.packages.extraBenefits.map((benefit: string) => (
+                                <li
+                                    class:list={[
+                                        "benefit-item",
+                                        { "benefit-excluded": !pkg.hasExtras },
+                                    ]}
+                                >
+                                    <span class="benefit-icon">
+                                        {pkg.hasExtras ? "✓" : "✗"}
+                                    </span>
+                                    <span
+                                        class={
+                                            !pkg.hasExtras
+                                                ? "text-strikethrough"
+                                                : ""
+                                        }
+                                    >
+                                        {benefit}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+
+                        <div class="package-cta">
+                            <a
+                                href={pkg.formUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn btn-primary"
+                            >
+                                {t.packages.register}
+                            </a>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .packages-section {
+        background: transparent;
+    }
+
+    .packages-header {
+        text-align: center;
+        margin-bottom: var(--spacing-3xl);
+    }
+
+    .packages-title {
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-primary);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .packages-date {
+        font-size: var(--font-size-lg);
+        color: var(--color-accent-gold);
+        font-weight: var(--font-weight-medium);
+    }
+
+    .packages-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+        gap: var(--spacing-xl);
+        max-width: 900px;
+        margin-inline: auto;
+    }
+
+    .package-card {
+        background: var(--color-background-light);
+        border-radius: var(--radius-lg);
+        padding: var(--spacing-xl);
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition:
+            transform var(--transition-base),
+            box-shadow var(--transition-base);
+    }
+
+    .package-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-glow-gold);
+        border-color: var(--color-accent-gold);
+    }
+
+    .package-header {
+        text-align: center;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .package-name {
+        font-size: var(--font-size-2xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-primary);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .early-bird-badge {
+        display: inline-block;
+        padding: var(--spacing-xs) var(--spacing-md);
+        background: var(--color-accent-red);
+        color: var(--color-text-primary);
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-semibold);
+        border-radius: var(--radius-pill);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .package-price {
+        text-align: center;
+        padding: var(--spacing-lg) 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .price-amount {
+        font-size: var(--font-size-4xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-accent-gold);
+    }
+
+    .package-benefits {
+        list-style: none;
+        flex: 1;
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .benefit-item {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm) 0;
+        font-size: var(--font-size-sm);
+        color: var(--color-text-secondary);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .benefit-item:last-child {
+        border-bottom: none;
+    }
+
+    .benefit-icon {
+        color: var(--color-accent-gold);
+        font-weight: var(--font-weight-bold);
+        flex-shrink: 0;
+    }
+
+    /* Excluded benefit styles */
+    .benefit-excluded {
+        opacity: 0.5;
+    }
+
+    .benefit-excluded .benefit-icon {
+        color: var(--color-accent-red);
+    }
+
+    .text-strikethrough {
+        text-decoration: line-through;
+    }
+
+    .package-cta {
+        text-align: center;
+    }
+
+    .package-cta .btn {
+        width: 100%;
+    }
+
+    @media (max-width: 640px) {
+        .package-card {
+            padding: var(--spacing-lg);
+        }
+
+        .price-amount {
+            font-size: var(--font-size-3xl);
+        }
+    }
+</style>

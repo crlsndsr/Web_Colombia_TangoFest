@@ -1,0 +1,387 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const t = useTranslations(lang);
+
+// Navigation items with section IDs for smooth scrolling
+const navItems = [
+  { id: "hero", label: t.nav.home },
+  { id: "memories", label: t.nav.memories },
+  { id: "organizer", label: t.nav.organizer },
+  { id: "packages", label: t.nav.packages },
+  { id: "maestros", label: t.nav.maestros },
+  { id: "hotel", label: t.nav.hotel },
+  {
+    id: "policy",
+    label: t.nav.policy,
+    href: `/${lang}/policy`,
+    isPage: true,
+  },
+  {
+    id: "register",
+    label: t.nav.register,
+    href: "https://docs.google.com/forms/d/e/1FAIpQLScX0vlhf5OUsbPuL85J85Fgft_X0c2G891pqdlTgxQfdT9ozQ/viewform",
+    isButton: true,
+    isExternal: true,
+  },
+];
+
+const langSwitch =
+  lang === "es"
+    ? { href: "/en", label: "EN" }
+    : { href: "/es", label: "ES" };
+---
+
+<header class="header" id="header">
+  <nav class="nav container">
+    <!-- Sticky logo - appears on scroll -->
+    <a
+      href={`/${lang}`}
+      class="nav-logo"
+      id="nav-logo"
+      aria-label="Colombia Tango Festival"
+    >
+      <img
+        src="/images/Logo.png"
+        alt="Colombia Tango Festival"
+        width="150"
+        height="100"
+      />
+    </a>
+
+    <!-- Right side controls: Language flag + Hamburger -->
+    <div class="nav-controls">
+      <!-- Language Flag Switcher -->
+      <a 
+        href={langSwitch.href} 
+        class="lang-flag" 
+        aria-label={t.nav.switchLang}
+        title={t.nav.switchLangTitle}
+      >
+        {lang === "es" ? (
+          <!-- Show US flag when viewing Spanish (switch to English) -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7410 3900" width="32" height="20">
+            <rect width="7410" height="3900" fill="#b22234"/>
+            <path d="M0,450H7410m0,600H0m0,600H7410m0,600H0m0,600H7410m0,600H0" stroke="#fff" stroke-width="300"/>
+            <rect width="2964" height="2100" fill="#3c3b6e"/>
+            <g fill="#fff">
+              <g id="s18"><g id="s9"><g id="s5"><g id="s4"><path id="s" d="M247,90 317.534230,307.082039 132.873218,172.917961H361.126782L176.465770,307.082039z"/><use href="#s" y="420"/><use href="#s" y="840"/><use href="#s" y="1260"/></g><use href="#s" y="1680"/></g><use href="#s4" x="247" y="210"/></g><use href="#s9" x="494"/></g><use href="#s18" x="988"/><use href="#s9" x="1976"/><use href="#s5" x="2470"/>
+            </g>
+          </svg>
+        ) : (
+          <!-- Show Colombia flag when viewing English (switch to Spanish) -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 4" width="32" height="20">
+            <rect width="6" height="2" fill="#FCD116"/>
+            <rect y="2" width="6" height="1" fill="#003893"/>
+            <rect y="3" width="6" height="1" fill="#CE1126"/>
+          </svg>
+        )}
+      </a>
+
+      <button
+        class="nav-toggle"
+        aria-label={t.nav.openMenu}
+        aria-expanded="false"
+        aria-controls="nav-menu"
+      >
+        <span class="hamburger"></span>
+      </button>
+    </div>
+
+    <ul class="nav-menu" id="nav-menu">
+      {
+        navItems.map((item) => (
+          <li class="nav-item">
+            <a
+              href={item.href || `#${item.id}`}
+              class:list={["nav-link", { "btn btn-primary": item.isButton }]}
+              target={item.isExternal ? "_blank" : undefined}
+              rel={item.isExternal ? "noopener noreferrer" : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-sticky);
+    background: transparent;
+    transition: background var(--transition-base);
+  }
+
+  .header.scrolled {
+    background: rgba(33, 32, 29, 0.19);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: auto;
+    padding: 0 7px;
+  }
+
+  /* Nav logo - hidden by default, shows on scroll */
+  .nav-logo {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.5);
+    transition:
+      opacity var(--transition-base),
+      transform var(--transition-base);
+    pointer-events: none;
+  }
+
+  .header.scrolled .nav-logo {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  .nav-logo img {
+    width: 150px;
+    height: 100px;
+    object-fit: contain;
+  }
+
+  /* Nav controls - flag + hamburger */
+  .nav-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .lang-flag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border-radius: 50%;
+    transition: transform var(--transition-base);
+  }
+
+  .lang-flag:hover {
+    transform: scale(1.1);
+  }
+
+  .lang-flag svg {
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Hamburger in purple circle */
+  .nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: #7c3aed;
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    z-index: calc(var(--z-sticky) + 1);
+    transition:
+      transform var(--transition-base),
+      background var(--transition-base);
+  }
+
+  .nav-toggle:hover {
+    background: #6d28d9;
+    transform: scale(1.05);
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(80%, 320px);
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    gap: var(--spacing-xl);
+    background: var(--color-background);
+    padding: var(--spacing-2xl);
+    transition: right var(--transition-base);
+    box-shadow: var(--shadow-lg);
+    list-style: none;
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-link {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color var(--transition-fast);
+    padding: var(--spacing-sm) 0;
+    position: relative;
+  }
+
+  .nav-link:not(.btn)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-accent-gold);
+    transition: width var(--transition-base);
+  }
+
+  .nav-link:not(.btn):hover::after {
+    width: 100%;
+  }
+
+  .nav-link:not(.btn):hover {
+    color: var(--color-accent-gold);
+  }
+
+  .hamburger,
+  .hamburger::before,
+  .hamburger::after {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--color-text-primary);
+    transition:
+      transform var(--transition-base),
+      background var(--transition-base);
+  }
+
+  .hamburger {
+    position: relative;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .hamburger::before {
+    top: -6px;
+  }
+
+  .hamburger::after {
+    top: 6px;
+  }
+
+  .nav-toggle[aria-expanded="true"] .hamburger {
+    background: transparent;
+  }
+
+  .nav-toggle[aria-expanded="true"] .hamburger::before {
+    transform: rotate(45deg) translate(4px, 5px);
+  }
+
+  .nav-toggle[aria-expanded="true"] .hamburger::after {
+    transform: rotate(-45deg) translate(4px, -5px);
+  }
+
+  .lang-switch {
+    border: 1px solid var(--color-accent-gold);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-pill);
+  }
+
+  .lang-switch:hover {
+    background: var(--color-accent-gold);
+    color: var(--color-background);
+  }
+
+  .nav-link {
+    font-size: var(--font-size-lg);
+  }
+
+  /* Register button in mobile menu - more padding */
+  .nav-menu .nav-link.btn {
+    padding: var(--spacing-md) var(--spacing-xl);
+    text-align: center;
+  }
+</style>
+
+<script>
+  // Header scroll effect
+  const header = document.getElementById("header");
+  const heroLogo = document.querySelector(".hero-logo");
+
+  const handleScroll = () => {
+    // Check if we've scrolled past the hero logo
+    if (heroLogo) {
+      const logoRect = heroLogo.getBoundingClientRect();
+      const scrolledPastLogo = logoRect.bottom < 0;
+
+      if (scrolledPastLogo) {
+        header?.classList.add("scrolled");
+      } else {
+        header?.classList.remove("scrolled");
+      }
+    } else if (window.scrollY > 100) {
+      header?.classList.add("scrolled");
+    } else {
+      header?.classList.remove("scrolled");
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  handleScroll(); // Initial check
+
+  // Mobile menu toggle
+  const navToggle = document.querySelector(".nav-toggle");
+  const navMenu = document.getElementById("nav-menu");
+
+  navToggle?.addEventListener("click", () => {
+    const isExpanded = navToggle.getAttribute("aria-expanded") === "true";
+    navToggle.setAttribute("aria-expanded", (!isExpanded).toString());
+    navMenu?.classList.toggle("active");
+    document.body.style.overflow = isExpanded ? "" : "hidden";
+  });
+
+  // Close menu on link click
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      navMenu?.classList.remove("active");
+      navToggle?.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    });
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", (e) => {
+      e.preventDefault();
+      const target = document.querySelector(anchor.getAttribute("href") || "");
+      if (target) {
+        const headerHeight = header?.offsetHeight || 80;
+        const targetPosition =
+          target.getBoundingClientRect().top + window.scrollY - headerHeight;
+        window.scrollTo({ top: targetPosition, behavior: "smooth" });
+      }
+    });
+  });
+</script>

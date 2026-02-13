@@ -1,0 +1,97 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Hero from "../../components/Hero.astro";
+import Memories from "../../components/Memories.astro";
+import Organizer from "../../components/Organizer.astro";
+import Packages from "../../components/Packages.astro";
+import Maestros from "../../components/Maestros.astro";
+import Hotel from "../../components/Hotel.astro";
+import Footer from "../../components/Footer.astro";
+import { useTranslations, type Lang } from "../../i18n/utils";
+
+export function getStaticPaths() {
+    return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
+
+const pageTitle = lang === "es" ? "Inicio" : "Home";
+---
+
+<BaseLayout title={pageTitle} lang={lang}>
+    <Header lang={lang} />
+
+    <main>
+        <Hero lang={lang} />
+
+        <!-- Memories Carousel -->
+        <Memories lang={lang} />
+
+        <!-- Organizer Section -->
+        <Organizer lang={lang} />
+
+        <!-- Packages Section -->
+        <Packages lang={lang} />
+
+        <!-- Maestros Section -->
+        <Maestros lang={lang} />
+
+        <!-- Hotel Section -->
+        <Hotel lang={lang} />
+
+        <!-- Contact Section -->
+        <section class="section" id="contact">
+            <div class="container">
+                <h2 class="section-title">{t.contact.title}</h2>
+                <p class="section-subtitle">{t.contact.subtitle}</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-label">{t.contact.phoneUsa}:</span>
+                        <a href="tel:+17868886619">+1 786 888 6619</a>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label"
+                            >{t.contact.phoneColombia}:</span
+                        >
+                        <a href="https://wa.me/573127276293">+57 312 727 6293</a
+                        >
+                    </div>
+                    <div class="contact-item">
+                        <a href="mailto:jorgenelgiraldo@gmail.com"
+                            >jorgenelgiraldo@gmail.com</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer lang={lang} />
+</BaseLayout>
+
+<style>
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-lg);
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+        font-size: var(--font-size-xl);
+    }
+
+    .contact-label {
+        color: var(--color-text-secondary);
+    }
+
+    .contact-item a {
+        color: var(--color-accent-gold);
+        font-weight: var(--font-weight-semibold);
+    }
+</style>

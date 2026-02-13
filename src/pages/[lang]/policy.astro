@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { useTranslations, type Lang } from "../../i18n/utils";
+
+export function getStaticPaths() {
+    return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={t.policy.pageTitle} lang={lang}>
+    <Header lang={lang} />
+
+    <main class="policy-page">
+        <div class="container">
+            <h1 class="policy-title">{t.policy.title}</h1>
+
+            <div class="policy-content">
+                <ul class="policy-list">
+                    <li class="policy-intro">
+                        {t.policy.intro}
+                    </li>
+                    {
+                        t.policy.rules.map(
+                            (rule: { condition: string; result: string }) => (
+                                <li>
+                                    <strong>{rule.condition}</strong> →{" "}
+                                    {rule.result}
+                                </li>
+                            ),
+                        )
+                    }
+                    <li class="policy-note-item">
+                        {t.policy.note}
+                    </li>
+                    <li class="policy-warning">
+                        <strong>{t.policy.warningBold}</strong>—{
+                            t.policy.warning
+                                .replace(t.policy.warningBold + "—", "")
+                                .replace(t.policy.warningBold, "")
+                        }
+                    </li>
+                </ul>
+
+                <div class="policy-cta">
+                    <a href={`/${lang}`} class="btn btn-secondary"
+                        >{t.policy.backHome}</a
+                    >
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <Footer lang={lang} />
+</BaseLayout>
+
+<style>
+    .policy-page {
+        padding-top: calc(80px + var(--spacing-3xl));
+        padding-bottom: var(--spacing-section);
+    }
+
+    .policy-title {
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-bold);
+        text-align: center;
+        margin-bottom: var(--spacing-2xl);
+        color: var(--color-accent-gold);
+    }
+
+    .policy-content {
+        max-width: 800px;
+        margin-inline: auto;
+    }
+
+    .policy-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        margin-bottom: var(--spacing-2xl);
+    }
+
+    .policy-list li {
+        padding: var(--spacing-lg);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: var(--radius-lg);
+        border-left: 4px solid var(--color-accent-gold);
+        line-height: var(--line-height-relaxed);
+        color: var(--color-text-secondary);
+    }
+
+    .policy-intro {
+        font-size: var(--font-size-lg);
+        font-style: italic;
+    }
+
+    .policy-list strong {
+        color: var(--color-text-primary);
+    }
+
+    .policy-note-item {
+        border-left-color: var(--color-text-secondary);
+        font-size: var(--font-size-sm);
+    }
+
+    .policy-warning {
+        border-left-color: var(--color-accent-red);
+        background: rgba(185, 28, 28, 0.1);
+    }
+
+    .policy-warning strong {
+        color: var(--color-accent-red);
+    }
+
+    .policy-cta {
+        text-align: center;
+    }
+</style>

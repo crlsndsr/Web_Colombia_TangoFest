@@ -1,0 +1,139 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+
+interface Props {
+    lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const t = useTranslations(lang);
+
+// Maestros data with correct file names and cities
+const maestros = [
+    { id: 1, image: "/images/AyJ.png", name: "A & J", city: "Medellín" },
+    { id: 2, image: "/images/ByS.png", name: "B & S", city: "Medellín" },
+    {
+        id: 3,
+        image: "/images/Carlosymarisol.png",
+        name: "Carlos & Marisol",
+        city: "Bogotá",
+    },
+    { id: 4, image: "/images/CyM.png", name: "C & M", city: "Medellín" },
+    { id: 5, image: "/images/DyP.png", name: "D & P", city: "Manizales" },
+    {
+        id: 6,
+        image: "/images/Juliynati.png",
+        name: "Juli & Nati",
+        city: "Cali",
+    },
+    { id: 7, image: "/images/JyS.png", name: "J & S", city: "Manizales" },
+    { id: 8, image: "/images/VyD.png", name: "V & D", city: "Manizales" },
+];
+---
+
+<section class="section maestros-section" id="maestros">
+    <div class="container">
+        <div class="maestros-header">
+            <h2 class="maestros-title">{t.maestros.sectionTitle}</h2>
+            <p class="maestros-subtitle">{t.maestros.sectionSubtitle}</p>
+        </div>
+
+        <div class="maestros-grid">
+            {
+                maestros.map((maestro) => (
+                    <article class="maestro-card">
+                        <div class="maestro-image">
+                            <img
+                                src={maestro.image}
+                                alt={maestro.name}
+                                width="350"
+                                height="350"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <p class="maestro-city">{maestro.city}</p>
+                    </article>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .maestros-section {
+        background: transparent;
+    }
+
+    .maestros-header {
+        text-align: center;
+        margin-bottom: var(--spacing-3xl);
+    }
+
+    .maestros-title {
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-primary);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .maestros-subtitle {
+        font-size: var(--font-size-lg);
+        color: var(--color-text-secondary);
+    }
+
+    .maestros-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-xl);
+    }
+
+    .maestro-card {
+        text-align: center;
+    }
+
+    .maestro-image {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1;
+        overflow: hidden;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .maestro-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .maestro-card:hover .maestro-image img {
+        transform: scale(1.08);
+    }
+
+    .maestro-city {
+        font-size: var(--font-size-base);
+        font-weight: var(--font-weight-normal);
+        color: var(--color-text-secondary);
+    }
+
+    /* Tablet: 3 columns */
+    @media (max-width: 1024px) {
+        .maestros-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+        }
+    }
+
+    /* Mobile: 2 columns */
+    @media (max-width: 640px) {
+        .maestros-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+        }
+
+        .maestro-city {
+            font-size: var(--font-size-sm);
+        }
+    }
+</style>

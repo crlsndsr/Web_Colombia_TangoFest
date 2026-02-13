@@ -1,0 +1,75 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const t = useTranslations(lang);
+
+const currentYear = new Date().getFullYear();
+const policyUrl = `/${lang}/policy`;
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <a href={policyUrl} class="footer-policy-link">{t.footer.policy}</a>
+      <p class="footer-copyright">
+        &copy; {currentYear} Colombia Tango Festival. {t.footer.rights}.
+      </p>
+      <a
+        href="https://denkiu.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer-credit"
+      >
+        Hecho con buenas ideas💡
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: #000000;
+    padding: var(--spacing-lg) 0;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    text-align: center;
+  }
+
+  .footer-policy-link {
+    color: var(--color-accent-gold);
+    font-size: var(--font-size-sm);
+    transition: opacity var(--transition-fast);
+  }
+
+  .footer-policy-link:hover {
+    opacity: 0.8;
+  }
+
+  .footer-copyright {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .footer-credit {
+    color: var(--color-text-secondary);
+    font-size: 0.75rem;
+    opacity: 0.7;
+    transition: opacity var(--transition-fast);
+    margin-top: var(--spacing-xs);
+  }
+
+  .footer-credit:hover {
+    opacity: 1;
+    color: var(--color-accent-gold);
+  }
+</style>
