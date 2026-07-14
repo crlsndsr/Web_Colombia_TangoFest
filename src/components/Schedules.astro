@@ -1,0 +1,331 @@
+---
+import { useTranslations, type Lang } from "../i18n/utils";
+
+interface Props {
+    lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const t = useTranslations(lang);
+
+const schedules = [
+    {
+        id: 1,
+        title: t.schedules.horarios1,
+        imageSrc: "/images/Horarios1.jpg",
+        fileName: "Horarios1.jpg"
+    },
+    {
+        id: 2,
+        title: t.schedules.horarios2,
+        imageSrc: "/images/Horarios2.jpg",
+        fileName: "Horarios2.jpg"
+    },
+    {
+        id: 3,
+        title: t.schedules.milongas,
+        imageSrc: "/images/Milongas.jpg",
+        fileName: "Milongas.jpg"
+    }
+];
+---
+
+<section class="section schedules-section" id="schedules">
+    <div class="container">
+        <div class="schedules-header">
+            <h2 class="section-title">{t.schedules.sectionTitle}</h2>
+            <p class="section-subtitle">{t.schedules.sectionSubtitle}</p>
+        </div>
+
+        <div class="schedules-grid">
+            {
+                schedules.map((item) => (
+                    <article class="schedule-card">
+                        <h3 class="schedule-title">{item.title}</h3>
+                        <div class="image-wrapper" data-src={item.imageSrc}>
+                            <img src={item.imageSrc} alt={item.title} loading="lazy" />
+                            <div class="image-overlay">
+                                <span class="overlay-icon">🔍</span>
+                            </div>
+                        </div>
+                        <div class="schedule-actions">
+                            <button class="btn btn-outline view-image-btn" data-src={item.imageSrc}>
+                                {t.schedules.view}
+                            </button>
+                            <a href={item.imageSrc} download={item.fileName} class="btn btn-primary">
+                                {t.schedules.download}
+                            </a>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Image Modal -->
+<dialog id="image-modal" class="image-modal">
+    <div class="modal-content">
+        <button id="close-modal" class="close-btn" aria-label="Cerrar modal">&times;</button>
+        <img id="modal-image" src="" alt="Vista grande del horario" />
+    </div>
+</dialog>
+
+<style>
+    .schedules-section {
+        background: transparent;
+    }
+
+    .schedules-header {
+        text-align: center;
+        margin-bottom: var(--spacing-3xl);
+    }
+
+    .schedules-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+        gap: var(--spacing-xl);
+        max-width: 1200px;
+        margin-inline: auto;
+    }
+
+    .schedule-card {
+        background: var(--color-background-light);
+        border-radius: var(--radius-lg);
+        padding: var(--spacing-xl);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition:
+            transform var(--transition-base),
+            box-shadow var(--transition-base);
+    }
+
+    .schedule-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-glow-gold);
+        border-color: var(--color-accent-gold);
+    }
+
+    .schedule-title {
+        font-size: var(--font-size-xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-primary);
+        margin-bottom: var(--spacing-lg);
+        text-align: center;
+        min-height: 3.5rem; /* Reserve space for up to 2 lines */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* Fixed size thumbnails */
+    .image-wrapper {
+        position: relative;
+        width: 100%;
+        height: 250px;
+        flex: 0 0 250px; /* Force exactly 250px height, prevent flex stretching */
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        margin-bottom: var(--spacing-lg);
+        background: rgba(0,0,0,0.2);
+        cursor: pointer;
+    }
+
+    .image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        display: block;
+        transition: transform var(--transition-base);
+    }
+
+    .image-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity var(--transition-base);
+    }
+
+    .overlay-icon {
+        font-size: 2rem;
+        transform: translateY(20px);
+        transition: transform var(--transition-base);
+    }
+
+    .schedule-card:hover .image-wrapper img {
+        transform: scale(1.05);
+    }
+
+    .image-wrapper:hover .image-overlay {
+        opacity: 1;
+    }
+    
+    .image-wrapper:hover .overlay-icon {
+        transform: translateY(0);
+    }
+
+    .schedule-actions {
+        display: flex;
+        gap: var(--spacing-md);
+        width: 100%;
+        margin-top: auto;
+    }
+
+    .schedule-actions .btn {
+        flex: 1;
+        text-align: center;
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: var(--font-size-sm);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .btn-outline {
+        background: transparent;
+        border: 1px solid var(--color-accent-gold);
+        color: var(--color-accent-gold);
+        border-radius: var(--radius-pill);
+        transition: background var(--transition-base), color var(--transition-base);
+        text-decoration: none;
+        font-weight: var(--font-weight-semibold);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .btn-outline:hover {
+        background: var(--color-accent-gold);
+        color: var(--color-background-dark);
+    }
+
+    @media (max-width: 640px) {
+        .schedule-actions {
+            flex-direction: column;
+        }
+    }
+
+    /* Modal Styles */
+    .image-modal {
+        border: none;
+        background: transparent;
+        padding: 0;
+        margin: auto;
+        overflow: visible;
+        max-width: 100vw;
+        max-height: 100vh;
+    }
+
+    .image-modal::backdrop {
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .modal-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content img {
+        max-width: 90vw;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: var(--radius-md);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+
+    .close-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(0,0,0,0.5);
+        border: 2px solid rgba(255,255,255,0.3);
+        color: white;
+        font-size: 2rem;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 9999;
+        transition: all 0.3s ease;
+        padding-bottom: 4px; /* visually center the times symbol */
+    }
+
+    .close-btn:hover {
+        background: var(--color-accent-gold);
+        color: black;
+        border-color: var(--color-accent-gold);
+        transform: scale(1.1);
+    }
+</style>
+
+<script>
+    const setupModal = () => {
+        const modal = document.getElementById('image-modal') as HTMLDialogElement;
+        const modalImg = document.getElementById('modal-image') as HTMLImageElement;
+        const closeBtn = document.getElementById('close-modal');
+        const viewButtons = document.querySelectorAll('.view-image-btn');
+        const imageWrappers = document.querySelectorAll('.image-wrapper');
+
+        if (!modal || !modalImg) return;
+
+        const openModal = (src: string) => {
+            modalImg.src = src;
+            modal.showModal();
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeModal = () => {
+            modal.close();
+            document.body.style.overflow = '';
+        };
+
+        viewButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const src = btn.getAttribute('data-src');
+                if (src) openModal(src);
+            });
+        });
+
+        imageWrappers.forEach(wrapper => {
+            wrapper.addEventListener('click', () => {
+                const src = wrapper.getAttribute('data-src');
+                if (src) openModal(src);
+            });
+        });
+
+        closeBtn?.addEventListener('click', closeModal);
+
+        // Close when clicking outside the image
+        modal.addEventListener('click', (e) => {
+            const dialogDimensions = modal.getBoundingClientRect();
+            if (
+                e.clientX < dialogDimensions.left ||
+                e.clientX > dialogDimensions.right ||
+                e.clientY < dialogDimensions.top ||
+                e.clientY > dialogDimensions.bottom
+            ) {
+                closeModal();
+            }
+        });
+    };
+
+    // Run setup on load and when Astro swaps pages
+    setupModal();
+    document.addEventListener('astro:page-load', setupModal);
+</script>

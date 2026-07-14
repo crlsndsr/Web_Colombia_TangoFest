@@ -1,5 +1,6 @@
 ---
 import { useTranslations, type Lang } from "../i18n/utils";
+import { FORM_MAIN_URL } from "../config";
 
 interface Props {
   lang?: Lang;
@@ -14,6 +15,7 @@ const navItems = [
   { id: "memories", label: t.nav.memories },
   { id: "organizer", label: t.nav.organizer },
   { id: "packages", label: t.nav.packages },
+  { id: "schedules", label: t.nav.schedules },
   { id: "maestros", label: t.nav.maestros },
   { id: "hotel", label: t.nav.hotel },
   {
@@ -25,7 +27,7 @@ const navItems = [
   {
     id: "register",
     label: t.nav.register,
-    href: "https://docs.google.com/forms/d/e/1FAIpQLScX0vlhf5OUsbPuL85J85Fgft_X0c2G891pqdlTgxQfdT9ozQ/viewform",
+    href: FORM_MAIN_URL,
     isButton: true,
     isExternal: true,
   },

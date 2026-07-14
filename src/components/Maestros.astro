@@ -19,7 +19,7 @@ const maestros = [
         city: "Bogotá",
     },
     { id: 4, image: "/images/CyM.png", name: "C & M", city: "Medellín" },
-    { id: 5, image: "/images/DyP.png", name: "D & P", city: "Manizales" },
+    { id: 5, image: "/images/Deivid_solo.webp", name: "D & P", city: "Manizales" },
     {
         id: 6,
         image: "/images/Juliynati.png",
@@ -28,6 +28,7 @@ const maestros = [
     },
     { id: 7, image: "/images/JyS.png", name: "J & S", city: "Manizales" },
     { id: 8, image: "/images/VyD.png", name: "V & D", city: "Manizales" },
+    { id: 9, image: "/images/ValenyDiana.webp", name: "Valen & Diana", city: "Manizales" },
 ];
 ---
 
@@ -84,8 +85,11 @@ const maestros = [
 
     .maestros-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, auto);
         gap: var(--spacing-xl);
+        max-width: 900px;
+        margin-inline: auto;
     }
 
     .maestro-card {
@@ -117,11 +121,12 @@ const maestros = [
         color: var(--color-text-secondary);
     }
 
-    /* Tablet: 3 columns */
+    /* Tablet: mantiene 3 columnas */
     @media (max-width: 1024px) {
         .maestros-grid {
             grid-template-columns: repeat(3, 1fr);
             gap: var(--spacing-lg);
+            max-width: 100%;
         }
     }
 

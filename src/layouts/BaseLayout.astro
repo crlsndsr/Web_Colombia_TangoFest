@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { useTranslations, type Lang } from "../i18n/utils";
+import { WHATSAPP_URL } from "../config";
 
 interface Props {
   title: string;
@@ -76,13 +77,32 @@ const t = useTranslations(lang);
     />
 
     <title>{title} | Colombia Tango Festival</title>
+
+    <!-- Meta Pixel Code -->
+    <script is:inline>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1386662209936986');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1386662209936986&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
   </head>
   <body>
     <slot />
 
     <!-- WhatsApp Floating Button -->
     <a
-      href="https://wa.me/573127276293"
+      id="whatsapp-btn"
+      href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
       class="whatsapp-float"
@@ -136,5 +156,26 @@ const t = useTranslations(lang);
         }
       }
     </style>
+    <script>
+      import { trackMetaConversion } from "../utils/metaTracking";
+
+      const whatsappBtn = document.getElementById("whatsapp-btn");
+      if (whatsappBtn) {
+        whatsappBtn.addEventListener("click", () => {
+          // 1. Enviar evento al Backend (API de Conversiones)
+          trackMetaConversion({
+            eventName: "Contact",
+            customData: {
+              content_name: "WhatsApp Button",
+            }
+          });
+          
+          // 2. Enviar evento al Frontend (Meta Pixel Normal)
+          if (typeof window !== 'undefined' && (window as any).fbq) {
+            (window as any).fbq('track', 'Contact', { content_name: 'WhatsApp Button' });
+          }
+        });
+      }
+    </script>
   </body>
 </html>

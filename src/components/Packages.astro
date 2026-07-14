@@ -1,5 +1,6 @@
 ---
 import { useTranslations, type Lang } from "../i18n/utils";
+import { FORM_MAIN_URL, FORM_PACKAGE_1_URL } from "../config";
 
 interface Props {
     lang?: Lang;
@@ -15,7 +16,7 @@ const packages = [
         price: "$1750",
         isEarlyBird: false,
         hasExtras: false,
-        formUrl: "https://forms.gle/LMb4L6F443MSkUVa6",
+        formUrl: FORM_PACKAGE_1_URL,
     },
     {
         id: 2,
@@ -23,8 +24,7 @@ const packages = [
         price: "$1990",
         isEarlyBird: true,
         hasExtras: true,
-        formUrl:
-            "https://docs.google.com/forms/d/e/1FAIpQLScX0vlhf5OUsbPuL85J85Fgft_X0c2G891pqdlTgxQfdT9ozQ/viewform",
+        formUrl: FORM_MAIN_URL,
     },
 ];
 ---

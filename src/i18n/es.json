@@ -4,6 +4,7 @@
     "memories": "Recuerdos",
     "organizer": "Organizador",
     "packages": "Paquetes",
+    "schedules": "Horarios",
     "maestros": "Maestros",
     "hotel": "Hotel",
     "policy": "Cancelación",
@@ -78,6 +79,15 @@
     "phoneUsa": "USA",
     "phoneColombia": "Colombia WhatsApp",
     "whatsappAria": "Contactar por WhatsApp"
+  },
+  "schedules": {
+    "sectionTitle": "HORARIOS Y ACTIVIDADES",
+    "sectionSubtitle": "Conoce la programación de nuestro evento y milongas",
+    "download": "Descargar",
+    "view": "Ver Grande",
+    "horarios1": "Horarios del Evento Parte 1",
+    "horarios2": "Horarios del Evento Parte 2",
+    "milongas": "Programación de Milongas"
   },
   "footer": {
     "rights": "Todos los derechos reservados",

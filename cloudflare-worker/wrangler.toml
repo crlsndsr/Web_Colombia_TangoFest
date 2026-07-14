@@ -1,0 +1,12 @@
+name = "colombia-tango-fest-api"
+main = "index.js"
+compatibility_date = "2024-09-23"
+
+[vars]
+META_API_VERSION = "v22.0"
+# Replace with your actual site domain after deployment to Hostinger:
+ALLOWED_ORIGIN = "https://colombiatangofestival.com"
+
+# Secrets — set these via CLI, never hardcode here:
+# wrangler secret put META_PIXEL_ID
+# wrangler secret put META_ACCESS_TOKEN

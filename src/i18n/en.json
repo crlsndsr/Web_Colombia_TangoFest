@@ -4,6 +4,7 @@
         "memories": "Memories",
         "organizer": "Organizer",
         "packages": "Packages",
+        "schedules": "Schedules",
         "maestros": "Instructors",
         "hotel": "Hotel",
         "policy": "Cancellation",
@@ -78,6 +79,15 @@
         "phoneUsa": "USA",
         "phoneColombia": "Colombia WhatsApp",
         "whatsappAria": "Contact via WhatsApp"
+    },
+    "schedules": {
+        "sectionTitle": "SCHEDULES & ACTIVITIES",
+        "sectionSubtitle": "Check out the event program and milongas",
+        "download": "Download",
+        "view": "View Larger",
+        "horarios1": "Event Schedule Part 1",
+        "horarios2": "Event Schedule Part 2",
+        "milongas": "Milongas Schedule"
     },
     "footer": {
         "rights": "All rights reserved",

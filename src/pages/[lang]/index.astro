@@ -5,10 +5,12 @@ import Hero from "../../components/Hero.astro";
 import Memories from "../../components/Memories.astro";
 import Organizer from "../../components/Organizer.astro";
 import Packages from "../../components/Packages.astro";
+import Schedules from "../../components/Schedules.astro";
 import Maestros from "../../components/Maestros.astro";
 import Hotel from "../../components/Hotel.astro";
 import Footer from "../../components/Footer.astro";
 import { useTranslations, type Lang } from "../../i18n/utils";
+import { WHATSAPP_URL, PHONE_USA_TEL, PHONE_USA_DISPLAY, PHONE_COLOMBIA_DISPLAY, EMAIL } from "../../config";
 
 export function getStaticPaths() {
     return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
@@ -35,6 +37,9 @@ const pageTitle = lang === "es" ? "Inicio" : "Home";
         <!-- Packages Section -->
         <Packages lang={lang} />
 
+        <!-- Schedules Section -->
+        <Schedules lang={lang} />
+
         <!-- Maestros Section -->
         <Maestros lang={lang} />
 
@@ -49,19 +54,14 @@ const pageTitle = lang === "es" ? "Inicio" : "Home";
                 <div class="contact-info">
                     <div class="contact-item">
                         <span class="contact-label">{t.contact.phoneUsa}:</span>
-                        <a href="tel:+17868886619">+1 786 888 6619</a>
+                        <a href={PHONE_USA_TEL}>{PHONE_USA_DISPLAY}</a>
                     </div>
                     <div class="contact-item">
-                        <span class="contact-label"
-                            >{t.contact.phoneColombia}:</span
-                        >
-                        <a href="https://wa.me/573127276293">+57 312 727 6293</a
-                        >
+                        <span class="contact-label">{t.contact.phoneColombia}:</span>
+                        <a href={WHATSAPP_URL}>{PHONE_COLOMBIA_DISPLAY}</a>
                     </div>
                     <div class="contact-item">
-                        <a href="mailto:jorgenelgiraldo@gmail.com"
-                            >jorgenelgiraldo@gmail.com</a
-                        >
+                        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
                     </div>
                 </div>
             </div>
