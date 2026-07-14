@@ -87,7 +87,8 @@
         "view": "View Larger",
         "horarios1": "Event Schedule Part 1",
         "horarios2": "Event Schedule Part 2",
-        "milongas": "Milongas Schedule"
+        "milongas": "Milongas Schedule",
+        "clases": "Classes Schedule"
     },
     "footer": {
         "rights": "All rights reserved",
